@@ -1,4 +1,5 @@
 import gym
+# testing
 env = gym.make('Blackjack-v0')
 #See details about the game rules here, but not necessary for your agent -- it will learn the rules by experimentation!
 #Environment definition: https://github.com/openai/gym/blob/master/gym/envs/toy_text/blackjack.py
