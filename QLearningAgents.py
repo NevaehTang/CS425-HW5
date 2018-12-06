@@ -13,6 +13,9 @@ class DictQLearningAgent(object):
         self._updatesSum=0.0
         self._maxChange=0.0
 
+    def setQtable(self, qtable):
+        self._q_table= qtable
+
     def reset(self):
         self._exploration_rate *= self._exploration_decay
         self._updatesSum=0.0
