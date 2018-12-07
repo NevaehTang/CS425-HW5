@@ -1,9 +1,10 @@
 import gym
 import sys
+import operator
+import pickle
 sys.path.append('/mnt/c/Users/Nevaeh//Desktop/CS425-HW5/')
 import QLearningAgents
-from QLearningAgents import DictQLearningAgent
-import pickle
+from DeepRLAgent import DictQLearningAgent
 
 # testing
 env = gym.make('Blackjack-v0')
@@ -21,7 +22,7 @@ def train():
     num_rounds = 1000
     i_episode = 100
 
-    for i in range(1, i_episode):
+    for i in range(1, i_episode+1):
         round = 1
         eachEpisodeReward = 0
         while round <= num_rounds:
@@ -43,18 +44,13 @@ def train():
                                                                                                          eachEpisodeReward / num_rounds))
         agent.reset()
 
-    pickle_out= open("QTable.pickle","wb")
-    pickle.dump(agent._q_table,pickle_out)
-    pickle_out.close()
+    agent.save("QTable.pickle")
     env.close()
 
 def test():
     agent = DictQLearningAgent(action_space=env.action_space, exploration_rate=0.5, learning_rate=0.1, discount=0.2,
                                exploration_decay_rate=0.95)
-    pickle_in= open("QTable.pickle","rb")
-    Qtable = pickle.load(pickle_in)
-    agent.setQtable(Qtable)
-
+    agent.load("QTable.pickle")
     total = 0
     for i_episode in range(1000):
         total_rewards = 0
